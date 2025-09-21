@@ -38,34 +38,22 @@ class FilePickerPreference : Preference, ActivityResultDispatcher.ActivityResult
         intent.type = "*/*"
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-
-        val activity = context as Activity
-        activity.startActivityForResult(intent, mActivityResultId)
-    }
-
-    override fun onActivityResult(resultCode: Int, resultData: Intent?) {
-        if (resultCode == Activity.RESULT_OK && resultData != null) {
-            try {
-                val path = PathResolver.getPath(context, resultData.data)
-                Log.d(TAG, "Picked file $path")
-                persistString(path)
-                updateSummary()
-            } catch (e: SecurityException) {
-                // I'm extremely lazy and don't want to figure permissions out right now
-                Toast.makeText(context.applicationContext,
-                        context.getString(R.string.file_picker_denied),
-                        Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-    }
-
-    private fun updateSummary() {
-        val value = getPersistedString("")
-        if (value.equals("")) {
-            summary = context.getString(R.string.file_picker_nofile)
-        } else {
-            summary = File(value).name
-        }
-    }
-}
+-        val value = getPersistedString("")
+-        if (value.equals("")) {
++        try {
++            val value = getPersistedString("")
++            if (value.equals("")) {
++                summary = context.getString(R.string.file_picker_nofile)
++            } else {
++                try {
++                    summary = File(value).name
++                } catch (e: Exception) {
++                    Log.e(TAG, "Error getting file name from path: $value", e)
++                    summary = value // Fallback to showing the full path
++                }
++            }
++        } catch (e: Exception) {
++            Log.e(TAG, "Error updating summary: ${e.message}", e)
+@@ -97,2 +108,0 @@
+-        } else {
+-            summary = File(value).name
