@@ -137,34 +137,39 @@ public class PathResolver {
             if (cursor != null)
                 cursor.close();
         }
-        return null;
-    }
-
-    public static boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri.getAuthority());
-    }
-
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is DownloadsProvider.
-     */
-    public static boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
-    }
-
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is MediaProvider.
-     */
-    public static boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri.getAuthority());
-    }
-
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is Google Photos.
-     */
-    public static boolean isGooglePhotosUri(Uri uri) {
-        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
-    }
-}
+-        // MediaStore (and general)
+-        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+-            // Return the remote address
+-            if (isGooglePhotosUri(uri))
+-                return uri.getLastPathSegment();
+-            return getDataColumn(context, uri, null, null);
++            // MediaStore (and general)
++            else if ("content".equalsIgnoreCase(uri.getScheme())) {
++                try {
++                    // Return the remote address
++                    if (isGooglePhotosUri(uri))
++                        return uri.getLastPathSegment();
++                    return getDataColumn(context, uri, null, null);
++                } catch (Exception e) {
++                    android.util.Log.e(TAG, "Error processing content URI: " + e.getMessage(), e);
++                    return null;
++                }
++            }
++            // File
++            else if ("file".equalsIgnoreCase(uri.getScheme())) {
++                try {
++                    return uri.getPath();
++                } catch (Exception e) {
++                    android.util.Log.e(TAG, "Error processing file URI: " + e.getMessage(), e);
++                    return null;
++                }
++            }
++            return null;
++        } catch (Exception e) {
++            android.util.Log.e(TAG, "Critical error in getPath: " + e.getMessage(), e);
++            Toast.makeText(context, context.getString(R.string.path_resolver_error, e.getMessage()), Toast.LENGTH_LONG).show();
++            return null;
+@@ -138,5 +157,0 @@
+-        // File
+-        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+-            return uri.getPath();
