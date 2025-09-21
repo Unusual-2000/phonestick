@@ -1,5 +1,3 @@
---- /workspace/phonestick/app/src/main/java/streetwalrus/usbmountr/ActivityResultDispatcher.kt
-+++ /workspace/phonestick/app/src/main/java/streetwalrus/usbmountr/ActivityResultDispatcher.kt
 @@ -29,2 +29,7 @@
 -        mHandlers[mCurId] = handler
 -        return mCurId++
