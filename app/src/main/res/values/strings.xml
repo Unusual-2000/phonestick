@@ -23,6 +23,14 @@
     <string name="image_chooser_copying_dialog">Copying image file</string>
 
     <!-- Toast messages -->
+    <string name="host_error_generic">Error del host: %1$s</string>
+    <string name="host_error_enable">Error al habilitar el gadget USB: %1$s</string>
+    <string name="host_error_disable">Error al deshabilitar el gadget USB: %1$s</string>
+    <string name="host_error_critical">Error crítico en operación USB: %1$s</string>
+    <string name="file_error_copy">Error al copiar archivo: %1$s</string>
+    <string name="file_error_access">Error al acceder al archivo: %1$s</string>
+    <string name="storage_error_access">Error al acceder al almacenamiento: %1$s</string>
+    <string name="path_resolver_error">Error al resolver ruta: %1$s</string>
     <string name="host_success">The device should now show up on your PC</string>
     <string name="host_disable_success">The device should now disappear from your PC</string>
     <string name="host_noroot">Couldn\'t get root access</string>
