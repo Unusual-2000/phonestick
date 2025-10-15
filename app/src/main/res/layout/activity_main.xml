@@ -44,6 +44,13 @@
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/encoderButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onEncoderClicked"
+            android:text="@string/encoder_button" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_vertical_spacing" />

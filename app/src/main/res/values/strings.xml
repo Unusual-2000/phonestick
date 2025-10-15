@@ -15,6 +15,7 @@
     <string name="host_help">This application will try to coexist with Android\'s USB services,
         but the system is very likely to override its effects at any moment.
     </string>
+    <string name="encoder_button">Open Encoder</string>
 
     <!-- ImageChooserActivity -->
     <string name="title_activity_image_chooser">Image files</string>
@@ -35,4 +36,12 @@
     <string name="host_disable_success">The device should now disappear from your PC</string>
     <string name="host_noroot">Couldn\'t get root access</string>
     <string name="file_picker_denied">Please grant access to storage to access this file</string>
+
+    <!-- EncoderActivity -->
+    <string name="title_activity_encoder">Encoder</string>
+    <string name="encoder_input_hint">Text to encode/decode</string>
+    <string name="encoder_encode">Encode (Base64)</string>
+    <string name="encoder_decode">Decode (Base64)</string>
+    <string name="encoder_result">Result</string>
+    <string name="encoder_error">Invalid input for decoding</string>
 </resources>

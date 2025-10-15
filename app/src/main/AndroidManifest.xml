@@ -36,6 +36,14 @@
                 android:name=".LicenseActivity"
                 android:label="@string/licenses">
         </activity>
+        <activity
+                android:name=".EncoderActivity"
+                android:label="@string/title_activity_encoder"
+                android:parentActivityName=".MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="streetwalrus.usbmountr.MainActivity"/>
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
